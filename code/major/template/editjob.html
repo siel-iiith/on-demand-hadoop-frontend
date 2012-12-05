@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- CSS -->
+<link rel="stylesheet" href="/static/css/layout.css" />
+
+	 <script src="/static/jsp/text.js" type="text/javascript"></script>
+          <script type="text/javascript">
+           var windowSizeArray=["width=600,height=600",
+	   "width=600,height=600,scrollbar=yes"];
+
+            $(document).ready(function(){
+                $('.newWindow').click(function (event){
+ 
+                    var url = $(this).attr("href");
+                    var windowName = "popUp";//$(this).attr("name");
+                    var windowSize = windowSizeArray[$(this).attr("rel")];
+ 
+                    window.open(url, windowName, windowSize);
+ 
+                    event.preventDefault();
+ 
+                });
+            });
+        </script>
+</head>
+<script type="text/javascript">
+	function testfunc1(){
+		window.open("http://127.0.0.1:8000/filebrowser","InputDirectory","width=750,height=900");	
+}
+	function testfunc2(){
+		window.open("http://127.0.0.1:8000/filebrowser","outputDirectory","width=750,height=900");	
+}
+</script>
+<body id="public">
+
+<header id="header">
+<hgroup>
+	<h1 class="site_title"><a href="index.html">Additional Features</a></h1>
+	<h2 class="section_title"></h2>
+</hgroup>
+</header> <!-- end of header bar -->
+
+		<section id="secondary_bar">
+	           <div class="breadcrumbs_container">
+	       <article class="breadcrumbs"><a href = "http://127.0.0.1:8000/userhome">Admin Page</a> <div class="breadcrumb_divider"></div> <a class="current">Advanced Options</a></article>
+	        </div>
+	    </section><!-- end of secondary bar -->
+
+
+
+<aside id="sidebar" class="column">
+
+            <hr/>
+                <h3>Hadoop</h3>
+                 <ul class="toggle">
+                      <li class="icn_add_user"><a href="http://127.0.0.1:8000/adminhome">User Jobs</a></li>
+                      <li class="icn_view_users"><a href="http://127.0.0.1:8000/logs">Logs</a></li>
+                 </ul>
+                <h3>HDFS</h3>
+                <ul class="toggle">
+                        <li class="icn_folder"><a href="http://127.0.0.1:8000/filebrowsero">File Browser</a></li>
+		</ul>
+		<h3>Logout</h3>
+		<ul class="toggle">
+
+			<li class="icn_jump_back"><a href="http://127.0.0.1:8000/login/">Logout</a></li>
+		</ul>
+		</aside>
+
+
+<div id="container" class="ltr">
+
+<!--<h1 id="logo">
+<a>User Jobs</a>
+</h1>-->
+
+<section id="main" class="column">
+ 
+                 <div class="clear"></div>
+ 
+  <article class="module width_full">
+     <header><h3>Advanced Options</h3></header>
+          <div class="module_content">
+
+
+<form id="form1" name="form1" enctype="multipart/form-data" method="post" action="/editjob/">
+
+<!--<header id="header" class="info">
+<div>Please enter in your Job details</div>
+</header>-->
+{% csrf_token %}
+	{% for field in jform %}
+	<fieldset>
+		<label>{{field.label}}</label>
+		{{field}}
+
+
+	</fieldset>
+	{% endfor %}
+
+
+<!--	<a href="http://127.0.0.1:8000/filebrowser" rel="0" class="newWindow">Browse Input Path</a>
+	</br>
+	<a href="http://127.0.0.1:8000/filebrowser" rel="1" class="newWindow">Browse Output Path
+	</a>
+	i/br>		-->
+
+	</div><!--module content-->
+
+
+	<footer>
+	<div class="submit_link">
+	<input type="submit" value="Submit" class="alt_btn">
+	</div>
+	</footer>
+</form>
+
+
+</article>
+
+</div><!--container-->
+
+</body>
+</html>

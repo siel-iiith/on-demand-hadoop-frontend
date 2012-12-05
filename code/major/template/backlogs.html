@@ -1,0 +1,22 @@
+<html>
+<body>
+	{%csrf_token%}
+	{%ifequal g 1%}
+	{%for i in lines%}
+	{{i}}
+	</br>
+	{%endfor%}
+	{%else%}
+	</br>
+	</br>
+	{%for i in lines%}
+    	 <a href="http://127.0.0.1:8000/logs/{{i.0}}">{{i.1}}</a>
+	  </br>
+	  </br>
+	  {%endfor%}
+	{%endifequal%}
+</body>
+</html>
+
+
+	  

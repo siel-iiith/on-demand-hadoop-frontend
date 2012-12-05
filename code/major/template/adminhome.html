@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>Dashboard I Admin Panel</title>
+	<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" />
+
+	<!--link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" /-->
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script src="/static/js/jquery-1.5.2.min.js" type="text/javascript"></script>
+	<script src="/static/js/hideshow.js" type="text/javascript"></script>
+	<script src="/static/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/static/js/jquery.equalHeight.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() 
+    	{ 
+      	  $(".tablesorter").tablesorter(); 
+   	 } 
+	);
+	$(document).ready(function() {
+
+	//When page loads...
+	$(".tab_content").hide(); //Hide all content
+	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+	$(".tab_content:first").show(); //Show first tab content
+
+	//On Click Event
+	$("ul.tabs li").click(function() {
+
+		$("ul.tabs li").removeClass("active"); //Remove any "active" class
+		$(this).addClass("active"); //Add "active" class to selected tab
+		$(".tab_content").hide(); //Hide all tab content
+
+		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+		$(activeTab).fadeIn(); //Fade in the active ID content
+		return false;
+	});
+
+});
+    </script>
+    <script type="text/javascript">
+    $(function(){
+        $('.column').equalHeight();
+    });
+</script>
+
+</head>
+
+
+<body>
+
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title"><a href="index.html">Website Admin</a></h1>
+		</hgroup>
+	</header> <!-- end of header bar -->
+	
+	<section id="secondary_bar">
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Admin Page</a> <div class="breadcrumb_divider"></div> <a class="current">Job Info</a></article>
+		</div>
+	</section><!-- end of secondary bar -->
+	
+	<aside id="sidebar" class="column">
+
+	<hr/>
+	<h3>Hadoop</h3>
+	<ul class="toggle">
+	<li class="icn_view_users"><a href="http://127.0.0.1:8000/logs">Logs</a></li>
+	</ul>
+	<h3>HDFS</h3>
+	<ul class="toggle">
+	<li class="icn_folder"><a href="http://127.0.0.1:8000/filebrowsero">File Browser</a></li>
+	</ul>
+	<h3>Logout</h3>
+	<ul class="toggle">
+
+	<li class="icn_jump_back"><a href="http://127.0.0.1:8000/login/">Logout</a></li>
+	</ul>
+	</aside>
+
+
+
+
+
+	<section id="main" class="column">
+		
+		
+		<article class="module width_3_quarter">
+		<header><h3 class="tabs_involved">Job Details</h3>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			<table class="tablesorter" cellspacing="0"> 
+				{%csrf_token%}
+{%ifequal g 0%}
+			<thead> 
+				<tr> 
+    				<th>User Name</th> 
+    				<th>Job ID</th> 
+    				<th>Job Name</th> 
+    				<th>State</th> 
+    				<th>Start Time</th> 
+    				<th>Finish Time</th> 
+    				<th>Action</th> 
+				</tr> 
+			</thead> 
+{%else%}
+
+			<thead> 
+				<tr> 
+    				<th>User Name</th> 
+    				<th>Job ID</th> 
+    				<th>Reduces Completed</th> 
+    				<th>Reduces Total</th> 
+    				<th>Maps Completed</th> 
+    				<th>Maps Total</th> 
+    				<th>Queue</th> 
+    				<th>Progress</th> 
+    				<th></th> 
+				</tr> 
+			</thead> 
+{%endifequal%}
+                         {%ifequal g 0%}
+			<tbody>
+				{%if dic_running%}
+					{%for el in dic_running%}
+						{%ifequal el 'id'%}
+										        
+						<tr> 
+							<td><a href="http://127.0.0.1:8000/userjob/{{dic_running.id}}">{{dic_running.id}}</a></td>
+				 
+					<!--td>el['id']</td-->
+							<td>{{dic_running.user}}</td>
+							<td>{{dic_running.name}}</td>
+							<td>{{dic_running.state}}</td>
+{%ifequal dic_running.id.0 'j'%}
+							<td>{{dic_running.startTime}}</td>
+{%else %}
+							<td>{{dic_running.startedTime}}</td>
+{%endifequal%}
+{%ifequal dic_running.id.0 'j'%}
+							<td>{{dic_running.finishTime}}</td>
+{%else%}
+							<td>{{dic_running.finishedTime}}</td>
+{%endifequal%}
+							<td><a href="http://127.0.0.1:8000/editjob"><input type="image" src="/static/images/icn_edit.png" title="Edit Job"></a><a href="http:127.0.0.1:8000/adminhome"><input type="image" src="/static/images/icn_trash.png" title="Delete Job"></a></td> 
+
+						</tr> 
+                                         {%endifequal%}
+					{%endfor%}
+				{%endif%}
+{%if dic_finished%}
+{%for job_finished in dic_finished%}
+						<tr> 
+							<td>{{job_finished.user}}</td>
+							<td><a href="http://127.0.0.1:8000/adminhome/{{job_finished.id}}">{{job_finished.id}}</a></td>
+				 
+
+					<!--td>el['id']</td-->
+							<td>{{job_finished.name}}</td>
+							<td>{{job_finished.state}}</td>
+							<td>{{job_finished.startTime}}</td>
+							<td>{{job_finished.finishTime}}</td>
+							<td><a href="http://127.0.0.1:8000/editjob"><input type="image" src="/static/images/icn_edit.png" title="Edit Job"></a><a href="http:127.0.0.1:8000/adminhome"><input type="image" src="/static/images/icn_trash.png" title="Delete Job"></a></td> 
+
+						</tr>
+{%endfor%}
+{%endif%}
+				</tbody>
+{%endifequal%}
+				
+{%ifequal g 1%}
+<tbody>
+
+				{%if dic_running%}
+					{%for el in dic_running%}
+						{%ifequal el 'id'%}
+						{%ifequal dic_running.id path%}
+										        
+						<tr> 
+							<td>{{dic_running.user}}</td>
+							<td>{{dic_running.id}}</td>
+							<td>{{dic_running.reducesCompleted}}</td>
+				 
+					<!--td>el['id']</td-->
+							<td>{{dic_running.reducesTotal}}</td>
+							<td>{{dic_running.mapsCompleted}}</td>
+							<td>{{dic_running.mapsTotal}}</td>
+							<td>{{dic_running.queue}}</td>
+							<td>    <div id="progress">
+								<span id="percent"> {{ progress }} </span>
+								<div id="bar" style="width:{{ progress }}%"></div>
+								</div>
+							</td>
+							<td></td>
+						</tr> 
+					{%endifequal%}
+                                         {%endifequal%}
+					{%endfor%}
+				{%endif%}
+				{%if dic_finished%}
+					{%for job_finished in dic_finished%}
+						{%ifequal job_finished.id path%}
+				        
+						<tr> 
+							<td>{{job_finished.user}}</td>
+							<td>{{job_finished.id}}</td>
+				 
+					<!--td>el['id']</td-->
+							<td>{{job_finished.reducesCompleted}}</td>
+							<td>{{job_finished.reducesTotal}}</td>
+							<td>{{job_finished.mapsCompleted}}</td>
+							<td>{{job_finished.mapsTotal}}</td>
+							<td>{{job_finished.queue}}</td>
+							<td>    <div id="progress">
+								<span id="percent"> {{ progress }} </span>
+								<div id="bar" style="width:{{ progress }}%"></div>
+								</div>
+							</td>
+							<td></td>
+						</tr> 
+                                         {%endifequal%}
+                             
+					{%endfor%}
+				{%endif%}
+				<footer>
+				<a href="http://127.0.0.1:8000/adminhome"><input type="submit" value="Go Back"></a>
+				</footer>
+				{%endifequal%}
+
+
+			</tbody> 
+			</table>
+		     </div><!-- end of #tab1 -->
+ 
+
+		</div><!-- end of .tab_container -->
+		
+		</article><!-- end of content manager article -->
+		<div class="clear"></div>
+		
+		<div class="spacer"></div>
+	</section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!--html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"-->
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8"/>
+<!--meta http-equiv="Content-type" content="text/html; charset=utf-8" /-->
+<title>Dashboard I User Panel</title>
+
+<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" />
+
+<!--title>Log in</title>
+<style>
+body{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}
+</style-->
+</head>
+<body>
+
+<header id="header">
+	  
+<hgroup>
+<h1 class="site_title">On Demand Hadoop</h1>
+<h2 class="section_title"></h2>
+</hgroup>
+</header> <!-- end of header bar -->
+
+<div class="centerize">
+<section id="main" class="column">
+<!--<article class="module width_3_quarter">-->
+<center>
+
+	<h3>{{ state }}</h3>
+<form action="/login/" method="post">
+{%csrf_token%}
+{% if next %}
+<input type="hidden" name="next" value="{{ next }}" />
+{% endif %}
+
+<fieldset style="width:48%; float:center;"> <!-- to make two field float next to one another, adjust values accordingly -->
+<label align="center">Username</label>
+<input type="text" style="width:90%;" name="username" value="{{ username}}" /></br>
+</fieldset><div class="clear"></div>
+
+<fieldset style="width:48%; float:center;"> <!-- to make two field float next to one another, adjust values accordingly -->
+<label align="center">Password</label>
+<input type="password" style="width:90%;" name="password" value="" /></br>
+</fieldset><div class="clear"></div>
+
+<input type="submit" value="Log In" />
+</form>
+</center>
+</section>
+</div>
+
+</body>
+</html>
+
+
+

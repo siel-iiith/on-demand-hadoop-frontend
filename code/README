@@ -1,0 +1,24 @@
+major/major/settings.py
+--- STATICFILES_DIRS = 'your home directory path' /home/saumyad/new/major/static
+--- TEMPLATE_DIRS  = /home/saumyad/new/major/major/template
+
+major/config_hadoop.py
+--- username = 'yourusername' saumyad
+--- hadoop_system = 'location of yarn' /home/saumyad/yarn/hadoop
+
+Copy start_yarn.sh to $hadoop_system/
+
+start_job.py:
+Starts a test job. Configuration in config_hadoop.py
+1) Start yarn --- in the test code, cmd2 starts the yarn. uncomment it if already started. Else a sample start_yarn.sh file is provided(set in the necessary java and home variables)
+
+major/major/app/views.py
+line 70 --- testing --- jar location --/home/saumyad/new/major/media/documents/
+line 105 --- logs location --- /home/saumyad/yarn/logs
+line 287 --- change username = 'saumyad'
+line 323 --- testing --- username = 'saumyad'
+
+USEFUL LINKS
+http://127.0.0.1:8000 --- Login via openstack.
+http://127.0.0.1:8000/userhome --- navigate to userhome
+http://127.0.0.1:8000/adminhome --- adminhome

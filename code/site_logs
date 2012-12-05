@@ -1,0 +1,79 @@
+Script started on Tue 04 Dec 2012 10:04:43 PM CST
+12/12/04 22:04:45 INFO service.AbstractService: Service:org.apache.hadoop.yarn.client.YarnClientImpl is inited.
+12/12/04 22:04:45 INFO service.AbstractService: Service:org.apache.hadoop.yarn.client.YarnClientImpl is started.
+12/12/04 22:04:46 INFO input.FileInputFormat: Total input paths to process : 1
+12/12/04 22:04:46 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+12/12/04 22:04:46 WARN snappy.LoadSnappy: Snappy native library not loaded
+12/12/04 22:04:47 INFO mapreduce.JobSubmitter: number of splits:1
+12/12/04 22:04:47 WARN conf.Configuration: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+12/12/04 22:04:47 WARN conf.Configuration: mapred.output.value.class is deprecated. Instead, use mapreduce.job.output.value.class
+12/12/04 22:04:47 WARN conf.Configuration: mapreduce.combine.class is deprecated. Instead, use mapreduce.job.combine.class
+12/12/04 22:04:47 WARN conf.Configuration: mapreduce.map.class is deprecated. Instead, use mapreduce.job.map.class
+12/12/04 22:04:47 WARN conf.Configuration: mapred.job.name is deprecated. Instead, use mapreduce.job.name
+12/12/04 22:04:47 WARN conf.Configuration: mapreduce.reduce.class is deprecated. Instead, use mapreduce.job.reduce.class
+12/12/04 22:04:47 WARN conf.Configuration: mapred.input.dir is deprecated. Instead, use mapreduce.input.fileinputformat.inputdir
+12/12/04 22:04:47 WARN conf.Configuration: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+12/12/04 22:04:47 WARN conf.Configuration: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+12/12/04 22:04:47 WARN conf.Configuration: mapred.output.key.class is deprecated. Instead, use mapreduce.job.output.key.class
+12/12/04 22:04:47 WARN conf.Configuration: mapred.working.dir is deprecated. Instead, use mapreduce.job.working.dir
+12/12/04 22:04:47 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1354679572057_0001
+12/12/04 22:04:48 INFO client.YarnClientImpl: Submitted application application_1354679572057_0001 to ResourceManager at /0.0.0.0:8032
+12/12/04 22:04:48 INFO mapreduce.Job: The url to track the job: http://ubuntu.ubuntu-domain:8088/proxy/application_1354679572057_0001/
+12/12/04 22:04:48 INFO mapreduce.Job: Running job: job_1354679572057_0001
+12/12/04 22:05:02 INFO mapreduce.Job: Job job_1354679572057_0001 running in uber mode : false
+12/12/04 22:05:02 INFO mapreduce.Job:  map 0% reduce 0%
+12/12/04 22:05:08 INFO mapreduce.Job:  map 100% reduce 0%
+12/12/04 22:05:15 INFO mapreduce.Job:  map 100% reduce 100%
+12/12/04 22:05:16 INFO mapreduce.Job: Job job_1354679572057_0001 completed successfully
+12/12/04 22:05:16 INFO mapreduce.Job: Counters: 43
+	File System Counters
+		FILE: Number of bytes read=266
+		FILE: Number of bytes written=130415
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=141
+		HDFS: Number of bytes written=12
+		HDFS: Number of read operations=6
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Rack-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=4154
+		Total time spent by all reduces in occupied slots (ms)=5052
+	Map-Reduce Framework
+		Map input records=6
+		Map output records=6
+		Map output bytes=48
+		Map output materialized bytes=26
+		Input split bytes=117
+		Combine input records=6
+		Combine output records=2
+		Reduce input groups=2
+		Reduce shuffle bytes=26
+		Reduce input records=2
+		Reduce output records=2
+		Spilled Records=4
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=43
+		CPU time spent (ms)=2790
+		Physical memory (bytes) snapshot=356093952
+		Virtual memory (bytes) snapshot=879558656
+		Total committed heap usage (bytes)=209321984
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=24
+	File Output Format Counters 
+		Bytes Written=12
+
+Script done on Tue 04 Dec 2012 10:05:16 PM CST

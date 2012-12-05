@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- CSS -->
+<link rel="stylesheet" href="/static/css/layout.css" />
+
+	 <script src="/static/jsp/text.js" type="text/javascript"></script>
+          <script type="text/javascript">
+           var windowSizeArray=["width=600,height=600",
+	   "width=600,height=600,scrollbar=yes"];
+
+            $(document).ready(function(){
+                $('.newWindow').click(function (event){
+ 
+                    var url = $(this).attr("href");
+                    var windowName = "popUp";//$(this).attr("name");
+                    var windowSize = windowSizeArray[$(this).attr("rel")];
+ 
+                    window.open(url, windowName, windowSize);
+ 
+                    event.preventDefault();
+ 
+                });
+            });
+        </script>
+</head>
+<script type="text/javascript">
+	function testfunc1(){
+		window.open("http://127.0.0.1:8000/filebrowser","InputDirectory","width=750,height=900");	
+}
+	function testfunc2(){
+		window.open("http://127.0.0.1:8000/filebrowser","outputDirectory","width=750,height=900");	
+}
+</script>
+<body id="public">
+
+<header id="header">
+<hgroup>
+	<h1 class="site_title"><a href="index.html">Add a new Job</a></h1>
+	<h2 class="section_title"></h2>
+</hgroup>
+</header> <!-- end of header bar -->
+
+		<section id="secondary_bar">
+	           <div class="breadcrumbs_container">
+	       <article class="breadcrumbs"><a href = "http://127.0.0.1:8000/userhome">User Page</a> <div class="breadcrumb_divider"></div> <a class="current">Add Job</a></article>
+	        </div>
+	    </section><!-- end of secondary bar -->
+
+
+
+<aside id="sidebar" class="column">
+
+            <hr/>
+                <h3>Hadoop</h3>
+                 <ul class="toggle">
+                      <li class="icn_add_user"><a href="http://127.0.0.1:8000/userjob">Job info</a></li>
+                         <li class="icn_view_users"><a href="http://127.0.0.1:8000/logs">Logs</a></li>
+                 </ul>
+                <h3>HDFS</h3>
+                <ul class="toggle">
+                        <li class="icn_folder"><a href="http://127.0.0.1:8000/filebrowsero">File Browser</a></li>
+		</ul>
+		<h3>Logout</h3>
+		<ul class="toggle">
+
+			<li class="icn_jump_back"><a href="http://127.0.0.1:8000/login/">Logout</a></li>
+		</ul>
+		</aside>
+
+
+<div id="container" class="ltr">
+
+<!--<h1 id="logo">
+<a>User Jobs</a>
+</h1>-->
+
+<section id="main" class="column">
+ 
+                 <div class="clear"></div>
+ 
+  <article class="module width_3_quarter">
+     <header><h3>Enter a new Job</h3></header>
+          <div class="module_content">
+
+
+<form id="form1" name="form1" enctype="multipart/form-data" method="post" action="/userhome/">
+
+<!--<header id="header" class="info">
+<div>Please enter in your Job details</div>
+</header>-->
+{% csrf_token %}
+	{% for field in jform %}
+	<fieldset>
+		{%ifequal field.name 'input_path'%}
+		<label>{{ field.label }}</label>
+	
+		{{field}}
+
+	        <div class="submit_link">
+		<input type = "button" value = "Browse HDFS" onclick = "testfunc1()"></br>
+	</div>
+	          {%endifequal%}
+		{%ifequal field.name 'output_path'%}
+		<label>{{ field.label }}</label>
+	
+		{{field}}
+
+	        <div class="submit_link">
+			<input type = "button" value = "Browse HDFS" onclick = "testfunc2()"></br>
+		</div>
+		{%endifequal%}
+		{%ifequal field.name 'name'%}
+		<label>{{field.label}}</label>
+		{{field}}
+		{%endifequal%}
+
+		{%ifequal field.name 'jar_file'%}
+		<label>{{field.label}}</label>
+		{{field}}
+		{%endifequal%}
+
+	</fieldset>
+	{% endfor %}
+
+
+<!--	<a href="http://127.0.0.1:8000/filebrowser" rel="0" class="newWindow">Browse Input Path</a>
+	</br>
+	<a href="http://127.0.0.1:8000/filebrowser" rel="1" class="newWindow">Browse Output Path
+	</a>
+	i/br>		-->
+
+	</div><!--module content-->
+
+
+	<footer>
+	<div class="submit_link">
+	<input type="submit" value="Submit" class="alt_btn">
+	</div>
+	</footer>
+</form>
+
+
+</article>
+
+<article class="module width_quarter">
+<header><h3>Aditional Features</h3></header>
+<div class="message_list">
+<div class="module_content">
+	<p><strong>Add more VMs to job</strong></p>
+	<label>Enter number of additional vms:</label>
+	<input type ="text" align="center"></input>
+
+	<label>Select Flavor</label>
+	<fieldset style="width:90%;" align="center"> <!-- to make two field float next to one another, adjust values accordingly -->
+	<select style="width:92%;" align="center">
+	<option>m1.tiny(1VCPU/25GB Disk/512MB Ram)</option>
+	<option>m1.small(1VCPU/25GB Disk/1024MB Ram)</option>
+	<option>m1.medium(2VCPU/25GB Disk/2048MB Ram)</option>
+	<option>m1.large(2VCPU/25GB Disk/4096MB Ram)</option>
+	<option>m1.xlarge(4VCPU/25GB Disk/6144MB Ram)</option>
+	</select>
+	</fieldset><div class="clear"></div>
+
+	<p><strong>Your Job quotas</strong></p>
+   <label>Instance Count(10)</label>
+   <div id="progress">
+	   <span id="percent"></span>
+<div id="bar" style="width:{{progress}}%"></div></div>
+	<p><strong></strong></p>
+   <label>VCPUs</label>
+   <div id="progress">
+<span id="percent">35%</span>
+<div id="bar" style="width:35%"></div></div>
+	<p><strong></strong></p>
+   <label>Disk</label>
+   <div id="progress">
+<span id="percent">55%</span>
+<div id="bar" style="width:55%"></div></div>
+	<p><strong></strong></p>
+   <label>Memory</label>
+   <div id="progress">
+<span id="percent">25%</span>
+<div id="bar" style="width:25%"></div></div>
+</div>
+</div>
+</div>
+
+</article><!-- end of messages article -->
+<div class="clear"></div>
+
+
+<div class="spacer"></div>
+</section>
+
+
+
+</body>
+</html>
